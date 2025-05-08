@@ -1,0 +1,86 @@
+<apex:page controller="CalculatorController">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .calculator h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .calculator label {
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .calculator input, .calculator select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .calculator button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .calculator .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+
+    <div class="calculator">
+        <h2>Simple Calculator</h2>
+        <apex:form >
+            <label>Enter Number 1:</label>
+            <apex:inputText value="{!num1}" />
+
+            <label>Enter Number 2:</label>
+            <apex:inputText value="{!num2}" />
+
+            <label>Select Operation:</label>
+            <apex:selectList value="{!operation}" size="1">
+                <apex:selectOption itemValue="Add" itemLabel="Add" />
+                <apex:selectOption itemValue="Subtract" itemLabel="Subtract" />
+                <apex:selectOption itemValue="Multiply" itemLabel="Multiply" />
+                <apex:selectOption itemValue="Divide" itemLabel="Divide" />
+            </apex:selectList>
+
+            <apex:commandButton value="Calculate" action="{!calculate}" rerender="result" />
+
+            <apex:outputPanel id="result">
+    			<div class="result">
+        			Result: {!IF(ISBLANK(TEXT(result)), 'Invalid Input or Division by Zero', result)}
+    			</div>
+			</apex:outputPanel>
+        </apex:form>
+    </div>
+</apex:page>
